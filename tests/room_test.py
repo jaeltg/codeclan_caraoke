@@ -31,7 +31,7 @@ class TestRoom(unittest.TestCase):
 
     def test_can_add_song_to_catalogue(self):
         song = Song("Si Vinieras por Mi", "Barbara y Fiorella Cayo")
-        self.add_song(song)
+        self.room.add_song(song)
         self.assertEqual(3, self.room.count_songs())            
 
 
