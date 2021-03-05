@@ -44,7 +44,9 @@ class TestRoom(unittest.TestCase):
     def test_can_check_out_guest(self):
         self.room.check_in_guest(self.guest_1)
         self.room.check_out_guest(self.guest_1)
-        self.assertEqual(0, self.room.count_guests())      
+        self.assertEqual(0, self.room.count_guests())
+        
+              
 
 
 
