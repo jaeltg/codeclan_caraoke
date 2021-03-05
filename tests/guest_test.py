@@ -14,5 +14,12 @@ class TestGuest(unittest.TestCase):
         self.assertEqual("Andrea", self.guest_1.name)
 
     def test_guest_has_wallet(self):
-        self.assertEqual(100, self.guest_2.wallet)        
+        self.assertEqual(100, self.guest_2.wallet)
+
+    def test_guest_has_songs(self):
+        self.assertEqual(0, self.guest_1.count_songs())     
+
+    # def test_guest_can_choose_song(self):
+    #     self.guest_1.choose_song()
+    #     self.assertEqual(1, self.guest_1.count_songs())          
 
