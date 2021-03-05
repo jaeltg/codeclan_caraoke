@@ -25,5 +25,18 @@ class TestGuest(unittest.TestCase):
 
     def test_guest_can_choose_song(self):
         self.guest_1.choose_song(self.song_1, self.room)
-        self.assertEqual(1, self.guest_1.count_songs())          
+        self.assertEqual(1, self.guest_1.count_songs()) 
+
+    def test_guest_can_request_song__song_not_in_catalogue(self):
+        song = Song("Si Vinieras por Mi", "Barbara y Fiorella Cayo")
+        self.guest_1.request_song(song, self.room)
+        self.assertEqual(3, self.room.count_songs())
+        self.assertEqual(1, self.guest_1.count_songs()) 
+
+    def test_guest_can_request_song__song_in_catalogue(self):
+        self.guest_1.request_song(self.song_1, self.room)
+        self.assertEqual(2, self.room.count_songs())
+        self.assertEqual(1, self.guest_1.count_songs())     
+
+
 

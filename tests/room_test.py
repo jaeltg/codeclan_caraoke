@@ -32,7 +32,21 @@ class TestRoom(unittest.TestCase):
     def test_can_add_song_to_catalogue(self):
         song = Song("Si Vinieras por Mi", "Barbara y Fiorella Cayo")
         self.room.add_song(song)
-        self.assertEqual(3, self.room.count_songs())            
+        self.assertEqual(3, self.room.count_songs()) 
+
+    def test_can_check_in_guest(self):
+        self.room.check_in_guest(self.guest_1)
+        self.assertEqual(1, self.room.count_guests())
+
+    def test_can_count_guests(self):
+        self.assertEqual(0, self.room.count_guests())
+
+    def test_can_check_out_guest(self):
+        self.room.check_in_guest(self.guest_1)
+        self.room.check_out_guest(self.guest_1)
+        self.assertEqual(0, self.room.count_guests())      
+
+
 
 
 
