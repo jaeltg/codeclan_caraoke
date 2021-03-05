@@ -6,3 +6,7 @@ class Guest:
         
     def count_songs(self):
         return len(self.songs)    
+
+    def choose_song(self, song, room):
+        if song in room.songs:
+            self.songs.append(song)    
