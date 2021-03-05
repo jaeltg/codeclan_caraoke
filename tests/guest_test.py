@@ -4,5 +4,7 @@ from classes.room import Room
 from classes.song import Song  
 
 class TestGuest(unittest.TestCase):
-    pass
+   
+    def setUp(self):
+        pass
 
