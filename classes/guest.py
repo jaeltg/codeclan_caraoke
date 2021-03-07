@@ -23,6 +23,7 @@ class Guest:
         if self.favourite_song in room.songs:
             return "Wooohooo, yeesss!!!"
 
+    # Can I use the same function for the choose food/drink method?
     def choose_drink_by_name(self, bar, drink_name):
         result_drink = None
 
@@ -32,7 +33,6 @@ class Guest:
                 
         return result_drink        
 
-    # Can I use the same function for the choose food/drink method?
     def choose_food_by_name(self, bar, food_name):
         result_food = None
 
