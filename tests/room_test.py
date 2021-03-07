@@ -1,7 +1,8 @@
 import unittest
 from classes.guest import Guest   
 from classes.room import Room   
-from classes.song import Song  
+from classes.song import Song
+from classes.bar import Bar
 
 class TestRoom(unittest.TestCase):
 
@@ -15,6 +16,24 @@ class TestRoom(unittest.TestCase):
         songs = [self.song_1, self.song_2]
         self.room = Room("Star Room", 5, 30.0, songs)
         self.room_1 = Room("Silver Room", 2, 40.0, songs)
+        
+        self.drinks = [
+            {"name": "Margarita",
+            "price": 10.0},
+            {"name": "Pisco Sour",
+            "price": 11.0},
+            {"name": "Chilcano",
+            "price": 9.5}
+        ]
+        self.food = [
+            {"name": "Ceviche",
+            "price": 8.0},
+            {"name": "Taquitos",
+            "price": 10.5},
+            {"name": "Chips and Guac",
+            "price": 6.5}
+        ]
+        self.bar = Bar(self.drinks, self.food)  
 
     def test_room_has_name(self):
         self.assertEqual("Star Room", self.room.name)
@@ -72,6 +91,28 @@ class TestRoom(unittest.TestCase):
     def test_guest_can_afford_entry_fee__cant_afford(self):
         guest = Guest("Karina", 20.0, self.song_3)
         self.assertEqual(False, self.room.guest_can_afford(guest))
+
+    def test_can_find_food_by_name(self):
+        food = self.room.find_food_by_name(self.bar, self.food[1]["name"])
+        self.assertEqual("Taquitos", food["name"])   
+
+    def test_can_charge_for_food(self):
+        self.room.check_in_guest(self.guest_1)
+        self.room.charge_for_food(self.bar, self.food[1]["name"], self.guest_1)
+        self.assertEqual(159.5, self.guest_1.wallet)
+        self.assertEqual(40.5, self.room.total_cash)
+
+    def test_can_find_drink_by_name(self):
+        drink = self.room.find_drink_by_name(self.bar, self.drinks[1]["name"])
+        self.assertEqual("Pisco Sour", drink["name"])   
+
+    def test_can_charge_for_drink(self):
+        self.room.check_in_guest(self.guest_1)
+        self.room.charge_for_drink(self.bar, self.drinks[1]["name"], self.guest_1)
+        self.assertEqual(159.0, self.guest_1.wallet)
+        self.assertEqual(41.0, self.room.total_cash)    
+
+
         
 
         
