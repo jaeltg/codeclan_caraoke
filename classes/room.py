@@ -32,34 +32,16 @@ class Room:
             guest.pay(self.fee)
             self.total_cash += self.fee
 
-# Can I do drink and food functions in just one?
-    def find_food_by_name(self, bar, food_name):
-        result_food = None
-
-        for food in bar.food:
-             if food["name"] == food_name:
-                result_food = food   
-                
-        return result_food
-
+# Can I use one method to charge for food and drinks?
     def charge_for_food(self, bar, food_name, guest):
-        food = self.find_food_by_name(bar, food_name)
-        if guest in self.guests:
+        food = guest.choose_food_by_name(bar, food_name)
+        if guest in self.guests and guest.wallet >= food["price"]:
             guest.pay(food["price"])
             self.total_cash += food["price"]
 
-    def find_drink_by_name(self, bar, drink_name):
-        result_drink = None
-
-        for drink in bar.drinks:
-             if drink["name"] == drink_name:
-                result_drink = drink
-                
-        return result_drink
-
     def charge_for_drink(self, bar, drink_name, guest):
-        drink = self.find_drink_by_name(bar, drink_name)
-        if guest in self.guests:
+        drink = guest.choose_drink_by_name(bar, drink_name)
+        if guest in self.guests and guest.wallet >= drink["price"]:
             guest.pay(drink["price"])
             self.total_cash += drink["price"]        
 

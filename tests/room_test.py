@@ -90,21 +90,13 @@ class TestRoom(unittest.TestCase):
 
     def test_guest_can_afford_entry_fee__cant_afford(self):
         guest = Guest("Karina", 20.0, self.song_3)
-        self.assertEqual(False, self.room.guest_can_afford(guest))
-
-    def test_can_find_food_by_name(self):
-        food = self.room.find_food_by_name(self.bar, self.food[1]["name"])
-        self.assertEqual("Taquitos", food["name"])   
+        self.assertEqual(False, self.room.guest_can_afford(guest))   
 
     def test_can_charge_for_food(self):
         self.room.check_in_guest(self.guest_1)
         self.room.charge_for_food(self.bar, self.food[1]["name"], self.guest_1)
         self.assertEqual(159.5, self.guest_1.wallet)
-        self.assertEqual(40.5, self.room.total_cash)
-
-    def test_can_find_drink_by_name(self):
-        drink = self.room.find_drink_by_name(self.bar, self.drinks[1]["name"])
-        self.assertEqual("Pisco Sour", drink["name"])   
+        self.assertEqual(40.5, self.room.total_cash)  
 
     def test_can_charge_for_drink(self):
         self.room.check_in_guest(self.guest_1)

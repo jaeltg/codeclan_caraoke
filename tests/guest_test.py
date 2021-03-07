@@ -1,7 +1,8 @@
 import unittest
 from classes.guest import Guest   
 from classes.room import Room   
-from classes.song import Song  
+from classes.song import Song
+from classes.bar import Bar
 
 class TestGuest(unittest.TestCase):
    
@@ -14,6 +15,24 @@ class TestGuest(unittest.TestCase):
 
         songs = [self.song_1, self.song_2]
         self.room = Room("Star Room", 5, 35.0, songs)
+
+        self.drinks = [
+            {"name": "Margarita",
+            "price": 10.0},
+            {"name": "Pisco Sour",
+            "price": 11.0},
+            {"name": "Chilcano",
+            "price": 9.5}
+        ]
+        self.food = [
+            {"name": "Ceviche",
+            "price": 8.0},
+            {"name": "Taquitos",
+            "price": 10.5},
+            {"name": "Chips and Guac",
+            "price": 6.5}
+        ]
+        self.bar = Bar(self.drinks, self.food)  
         
     def test_guest_has_name(self):
         self.assertEqual("Andrea", self.guest_1.name)
@@ -45,6 +64,13 @@ class TestGuest(unittest.TestCase):
     def test_favourite_song_in_room_playlist(self):
         self.assertEqual("Wooohooo, yeesss!!!", self.guest_1.favourite_song_in_room_playlist(self.room))
 
+    def test_can_choose_food_by_name(self):
+        food = self.guest_1.choose_food_by_name(self.bar, self.food[1]["name"])
+        self.assertEqual("Taquitos", food["name"])
+
+    def test_can_choose_drink_by_name(self):
+        drink = self.guest_1.choose_drink_by_name(self.bar, self.drinks[1]["name"])
+        self.assertEqual("Pisco Sour", drink["name"])      
 
 
 
